@@ -1,5 +1,7 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,16 +13,15 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using Npgsql;
 
 namespace NoteMaster
 {
     /// <summary>
-    /// Логика взаимодействия для notes.xaml
+    /// Логика взаимодействия для reminders.xaml
     /// </summary>
-    public partial class notes : Window
+    public partial class reminders : Window
     {
-        public notes()
+        public reminders()
         {
             InitializeComponent();
             LoadDataFromDatabase();
@@ -38,8 +39,7 @@ namespace NoteMaster
             // Строка подключения к PostgreSQL
             string connectionString = "Host=localhost;Username=postgres;Password=0000;Database=noteapp";
 
-            List<User> users = new List<User>();
-
+            List<remindersclass> users = new List<remindersclass>();
             try
             {
                 using (var connection = new NpgsqlConnection(connectionString))
@@ -47,24 +47,20 @@ namespace NoteMaster
                     connection.Open();
 
                     // SQL-запрос для выборки данных
-                    string query = "SELECT * FROM notes";
+                    string query = "SELECT * FROM reminders";
                     using (var command = new NpgsqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                users.Add(new User
+                                users.Add(new remindersclass
                                 {
                                     Id = reader.GetGuid(0),
-                                    title = reader.GetString(1),
-                                    content = reader.GetString(2),
-                                    categoryid = reader.GetGuid(3),
-                                    tags = reader.GetString(4),
-                                    createdat = reader.GetDateTime(5),
-                                    updatedat = reader.GetDateTime(6),
-                                    isarchived = reader.GetBoolean(7),
-                                    isdeleted = reader.GetBoolean(8)
+                                    noteid = reader.GetGuid(1),
+                                    remindertime = reader.GetDateTime(2),
+                                    recurrence = reader.GetString(3),
+                                    isactive = reader.GetBoolean(4)
                                 });
                             }
                         }
@@ -82,16 +78,12 @@ namespace NoteMaster
     }
 
     // Модель данных
-    public class User
+    public class remindersclass
     {
         public Guid Id { get; set; }
-        public string title { get; set; }
-        public string content { get; set; }
-        public Guid categoryid { get; set; }
-        public string tags { get; set; }
-        public DateTime createdat { get; set; }
-        public DateTime updatedat { get; set; }
-        public bool isarchived { get; set; }
-        public bool isdeleted { get; set; }
+        public Guid noteid { get; set; }
+        public DateTime remindertime { get; set; }
+        public string recurrence { get; set; }
+        public bool isactive { get; set; }
     }
 }

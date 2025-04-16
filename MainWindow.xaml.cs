@@ -37,7 +37,21 @@ namespace NoteMaster
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
+            categories categories = new categories();
+            categories.Show();
+            this.Hide();
+        }
 
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            reminders reminders = new reminders();
+            reminders.Show();
+            this.Hide();
         }
     }
 }
