@@ -7,7 +7,10 @@
         mc:Ignorable="d"
         Title="notes" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" />
-        <Button Content="Back" HorizontalAlignment="Left" Margin="673,362,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="Button_Click"/>
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" Margin="10,10,10,175" />
+        <Button Content="Back" HorizontalAlignment="Left" Margin="677,360,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="Button_Click"/>
+        <Button Content="create" HorizontalAlignment="Left" Margin="27,360,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="Button_Click_1"/>
+        <Button Content="update" HorizontalAlignment="Left" Margin="153,360,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="Button_Click_2"/>
+        <Button Content="delete" HorizontalAlignment="Left" Margin="297,360,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="Button_Click_3"/>
     </Grid>
 </Window>

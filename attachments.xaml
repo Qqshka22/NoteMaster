@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="attachments" Height="450" Width="800">
     <Grid>
-        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" />
+        <DataGrid x:Name="dataGrid" AutoGenerateColumns="True" Margin="10,10,10,108" />
         <Button Content="Back" HorizontalAlignment="Left" Margin="673,362,0,0" VerticalAlignment="Top" Height="45" Width="90" Click="Button_Click"/>
     </Grid>
 </Window>
