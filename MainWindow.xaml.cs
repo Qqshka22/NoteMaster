@@ -20,5 +20,38 @@ namespace NoteMaster
         {
             InitializeComponent();
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            notes notes = new notes();
+            notes.Show();
+            this.Hide();
+        }
+
+        private void Button_Click_1(object sender, RoutedEventArgs e)
+        {
+            attachments attachments = new attachments();
+            attachments.Show();
+            this.Hide();
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            categories categories = new categories();
+            categories.Show();
+            this.Hide();
+        }
+
+        private void Button_Click_3(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+
+        private void Button_Click_4(object sender, RoutedEventArgs e)
+        {
+            reminders reminders = new reminders();
+            reminders.Show();
+            this.Hide();
+        }
     }
 }

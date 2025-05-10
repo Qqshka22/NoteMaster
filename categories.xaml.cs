@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,21 +17,14 @@ using Npgsql;
 namespace NoteMaster
 {
     /// <summary>
-    /// Логика взаимодействия для notes.xaml
+    /// Логика взаимодействия для categories.xaml
     /// </summary>
-    public partial class notes : Window
+    public partial class categories : Window
     {
-        public notes()
+        public categories()
         {
             InitializeComponent();
             LoadDataFromDatabase();
-        }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            MainWindow mainWindow = new MainWindow();
-            mainWindow.Show();
-            this.Hide();
         }
 
         private void LoadDataFromDatabase()
@@ -38,7 +32,7 @@ namespace NoteMaster
             // Строка подключения к PostgreSQL
             string connectionString = "Host=localhost;Username=postgres;Password=0000;Database=noteapp";
 
-            List<User> users = new List<User>();
+            List<categoriesclass> users = new List<categoriesclass>();
 
             try
             {
@@ -47,24 +41,17 @@ namespace NoteMaster
                     connection.Open();
 
                     // SQL-запрос для выборки данных
-                    string query = "SELECT * FROM notes";
+                    string query = "SELECT * FROM categories";
                     using (var command = new NpgsqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                users.Add(new User
+                                users.Add(new categoriesclass
                                 {
                                     Id = reader.GetGuid(0),
-                                    title = reader.GetString(1),
-                                    content = reader.GetString(2),
-                                    categoryid = reader.GetGuid(3),
-                                    tags = reader.GetString(4),
-                                    createdat = reader.GetDateTime(5),
-                                    updatedat = reader.GetDateTime(6),
-                                    isarchived = reader.GetBoolean(7),
-                                    isdeleted = reader.GetBoolean(8)
+                                    name = reader.GetString(1)
                                 });
                             }
                         }
@@ -80,33 +67,18 @@ namespace NoteMaster
             }
         }
 
-        private void Button_Click_1(object sender, RoutedEventArgs e)
+        private void Button_Click(object sender, RoutedEventArgs e)
         {
-            
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            
+            MainWindow mainWindow = new MainWindow();
+            mainWindow.Show();
+            this.Hide();
         }
     }
 
     // Модель данных
-    public class User
+    public class categoriesclass
     {
         public Guid Id { get; set; }
-        public string title { get; set; }
-        public string content { get; set; }
-        public Guid categoryid { get; set; }
-        public string tags { get; set; }
-        public DateTime createdat { get; set; }
-        public DateTime updatedat { get; set; }
-        public bool isarchived { get; set; }
-        public bool isdeleted { get; set; }
+        public string name { get; set; }
     }
 }

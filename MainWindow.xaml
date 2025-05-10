@@ -5,8 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:NoteMaster"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        Title="MainWindow" Height="500" Width="800">
     <Grid>
-
+        <Button Content="note" HorizontalAlignment="Left" Margin="641,395,0,0" VerticalAlignment="Top" Height="54" Width="108" Click="Button_Click"/>
+        <Button Content="attachments" HorizontalAlignment="Left" Margin="641,319,0,0" VerticalAlignment="Top" Height="54" Width="108" Click="Button_Click_1"/>
+        <Button Content="categories" HorizontalAlignment="Left" Margin="641,242,0,0" VerticalAlignment="Top" Height="54" Width="108" RenderTransformOrigin="1.036,0.61" Click="Button_Click_2"/>
+        <Button Content="exit" HorizontalAlignment="Left" Margin="32,383,0,0" VerticalAlignment="Top" Height="54" Width="108" Click="Button_Click_3"/>
+        <Button Content="reminders" HorizontalAlignment="Left" Margin="641,167,0,0" VerticalAlignment="Top" Height="54" Width="108" Click="Button_Click_4"/>
     </Grid>
 </Window>

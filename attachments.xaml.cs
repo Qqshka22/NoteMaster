@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -16,11 +17,11 @@ using Npgsql;
 namespace NoteMaster
 {
     /// <summary>
-    /// Логика взаимодействия для notes.xaml
+    /// Логика взаимодействия для attachments.xaml
     /// </summary>
-    public partial class notes : Window
+    public partial class attachments : Window
     {
-        public notes()
+        public attachments()
         {
             InitializeComponent();
             LoadDataFromDatabase();
@@ -38,7 +39,7 @@ namespace NoteMaster
             // Строка подключения к PostgreSQL
             string connectionString = "Host=localhost;Username=postgres;Password=0000;Database=noteapp";
 
-            List<User> users = new List<User>();
+            List<attachmentsclass> users = new List<attachmentsclass>();
 
             try
             {
@@ -47,24 +48,19 @@ namespace NoteMaster
                     connection.Open();
 
                     // SQL-запрос для выборки данных
-                    string query = "SELECT * FROM notes";
+                    string query = "SELECT * FROM attachments";
                     using (var command = new NpgsqlCommand(query, connection))
                     {
                         using (var reader = command.ExecuteReader())
                         {
                             while (reader.Read())
                             {
-                                users.Add(new User
+                                users.Add(new attachmentsclass
                                 {
                                     Id = reader.GetGuid(0),
-                                    title = reader.GetString(1),
-                                    content = reader.GetString(2),
-                                    categoryid = reader.GetGuid(3),
-                                    tags = reader.GetString(4),
-                                    createdat = reader.GetDateTime(5),
-                                    updatedat = reader.GetDateTime(6),
-                                    isarchived = reader.GetBoolean(7),
-                                    isdeleted = reader.GetBoolean(8)
+                                    noteid = reader.GetGuid(1),
+                                    filepath = reader.GetString(2),
+                                    filesize = reader.GetInt32(3)
                                 });
                             }
                         }
@@ -79,34 +75,15 @@ namespace NoteMaster
                 MessageBox.Show($"Ошибка: {ex.Message}");
             }
         }
-
-        private void Button_Click_1(object sender, RoutedEventArgs e)
-        {
-            
-        }
-
-        private void Button_Click_2(object sender, RoutedEventArgs e)
-        {
-
-        }
-
-        private void Button_Click_3(object sender, RoutedEventArgs e)
-        {
-            
-        }
     }
 
     // Модель данных
-    public class User
+    public class attachmentsclass
     {
         public Guid Id { get; set; }
-        public string title { get; set; }
-        public string content { get; set; }
-        public Guid categoryid { get; set; }
-        public string tags { get; set; }
-        public DateTime createdat { get; set; }
-        public DateTime updatedat { get; set; }
-        public bool isarchived { get; set; }
-        public bool isdeleted { get; set; }
+        public Guid noteid { get; set; }
+        public string filepath { get; set; }
+        public int filesize { get; set; }
     }
 }
+
